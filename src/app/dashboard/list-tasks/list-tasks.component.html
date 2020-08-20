@@ -1,0 +1,49 @@
+<div class="card mt-4">
+  <div class="card-body">
+    <div class="input-group">
+      <input
+        type="text"
+        placeholder="Escribe tu tarea aqui"
+        class="form-control form-control-l"
+        [(ngModel)]="Task"
+      />
+      <div class="input-group-append">
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="AddTask()"
+          [disabled]="Task === ''"
+        >
+          Agregar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<br />
+<br />
+<div class="container text-center" *ngIf="ListTask.length == 0">
+  <img src="../../../assets/Imgs/Nothing.svg" alt="" />
+  <h3>No hay tareas para mostrar</h3>
+</div>
+
+<ul class="list-group">
+  <li
+    class="list-group-item d-flex justify-content-between align-items-center"
+    *ngFor="let Tasks of ListTask; let i = index"
+  >
+    <span class="text-primary cursor" (click)="UpdateTask(Tasks, i)">
+      <i
+        [ngClass]="Tasks.finalizada ? 'far fa-dot-circle' : 'far fa-circle'"
+        class="far fa-circle"
+      ></i>
+    </span>
+    {{ Tasks.nombre }}
+    <span
+      class="text-danger cursor"
+      (click)="DeleteTask(i)"
+    >
+      <i class="fas fa-trash"></i>
+    </span>
+  </li>
+</ul>
